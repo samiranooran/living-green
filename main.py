@@ -15,7 +15,15 @@ bcrypt = Bcrypt(app)
 # Change this to your secret key (can be anything, it's for extra protection)
 app.secret_key = 'abcd'
 
+# Enter your database connection details below
+app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
+app.config['MYSQL_PORT'] = int(os.getenv('MYSQL_PORT'))
+app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
+app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
+app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
 
+# Intialize MYSQL
+mysql = MySQL(app)
 
 # http://localhost:5000/register - this will be the registration page, we need to use both GET and POST requests
 @app.route('/register/', methods=['GET', 'POST'])
