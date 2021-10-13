@@ -36,6 +36,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
+        #db = get_db()
         # Check if account exists using MySQL
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM accounts WHERE username = %s', (username,))
