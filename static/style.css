@@ -16,8 +16,8 @@ body {
 	width: 400px;
 	background-color: rgba(96, 109, 101, 0.795);
 	box-shadow: 0 0 19px 0 rgba(0, 0, 0, 0.3);
-	margin: 350px auto;
-  border-radius: 10px;
+	margin: 100px auto auto;
+	border-radius: 10px;
 }
 
 .login h1, .register h1 {

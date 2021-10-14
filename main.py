@@ -25,6 +25,12 @@ app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
 # Intialize MYSQL
 mysql = MySQL(app)
 
+
+@app.route("/")
+def index():
+    return redirect('/login/')
+
+
 # http://localhost:5000/register - this will be the registration page, we need to use both GET and POST requests
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -36,7 +42,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        #db = get_db()
+        # db = get_db()
         # Check if account exists using MySQL
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM accounts WHERE username = %s', (username,))
@@ -65,7 +71,7 @@ def register():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    #if you're logged in you should not be able to see the login page
+    # if you're logged in you should not be able to see the login page
     if 'loggedin' in session:
         return 'You are already logged in'
     # Output message if something goes wrong...
