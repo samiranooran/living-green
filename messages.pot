@@ -1,0 +1,77 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-10-24 13:19-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: main.py:68
+msgid "Account already exists!"
+msgstr ""
+
+#: main.py:70
+msgid "Invalid email address!"
+msgstr ""
+
+#: main.py:72
+msgid "Username must contain only characters and numbers!"
+msgstr ""
+
+#: main.py:74 main.py:83
+msgid "Please fill out the form!"
+msgstr ""
+
+#: main.py:80
+msgid "You have successfully registered!"
+msgstr ""
+
+#: main.py:92
+msgid "You are already logged in"
+msgstr ""
+
+#: main.py:111
+msgid "You have successfully logged in"
+msgstr ""
+
+#: main.py:113
+msgid "Incorrect password!"
+msgstr ""
+
+#: main.py:115
+msgid "Incorrect Username!"
+msgstr ""
+
+#: templates/login.html:6 templates/login.html:12 templates/login.html:14
+#: templates/login.html:27 templates/register.html:15
+msgid "Login"
+msgstr ""
+
+#: templates/login.html:15 templates/register.html:7 templates/register.html:13
+#: templates/register.html:16 templates/register.html:32
+msgid "Register"
+msgstr ""
+
+#: templates/login.html:21 templates/register.html:22
+msgid "Username"
+msgstr ""
+
+#: templates/login.html:25 templates/register.html:26
+msgid "Password"
+msgstr ""
+
+#: templates/register.html:30
+msgid "Email"
+msgstr ""
+

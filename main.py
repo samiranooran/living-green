@@ -7,10 +7,21 @@ import re
 import os
 from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
+from flask_babel import Babel, gettext
+
+app = Flask(__name__)
+app.config['BABEL_DEFAULT_LOCALE'] = 'fr'
+babel = Babel(app)
 
 load_dotenv()
 
-app = Flask(__name__)
+# add to you main app code
+@babel.localeselector
+def get_locale():
+    if 'language' in session:
+        return session['language']
+    return 'en'
+
 bcrypt = Bcrypt(app)
 # Change this to your secret key (can be anything, it's for extra protection)
 app.secret_key = 'abcd'
@@ -24,6 +35,12 @@ app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
 
 # Intialize MYSQL
 mysql = MySQL(app)
+
+@app.route("/change-language")
+def change_language():
+    session['language'] = request.args.get('ln')
+    back = request.referrer if request.referrer else '/'
+    return redirect(back)
 
 
 @app.route("/")
@@ -49,31 +66,31 @@ def register():
         account = cursor.fetchone()
         # If account exists show error and validation checks
         if account:
-            msg = 'Account already exists!'
+            msg = gettext('Account already exists!')
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            msg = 'Invalid email address!'
+            msg = gettext('Invalid email address!')
         elif not re.match(r'[A-Za-z0-9]+', username):
-            msg = 'Username must contain only characters and numbers!'
+            msg = gettext('Username must contain only characters and numbers!')
         elif not username or not password or not email:
-            msg = 'Please fill out the form!'
+            msg = gettext('Please fill out the form!')
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
             cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)',
                            (username, bcrypt.generate_password_hash(password).decode('utf-8'), email,))
             mysql.connection.commit()
-            msg = 'You have successfully registered!'
+            msg = gettext('You have successfully registered!')
     elif request.method == 'POST':
         # Form is empty... (no POST data)
-        msg = 'Please fill out the form!'
+        msg = gettext('Please fill out the form!')
     # Show registration form with message (if any)
-    return render_template('en/register.html', msg=msg)
+    return render_template('register.html', msg=msg)
 
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     # if you're logged in you should not be able to see the login page
     if 'loggedin' in session:
-        return 'You are already logged in'
+        return gettext('You are already logged in')
     # Output message if something goes wrong...
     msg = ''
     # Check if "username" and "password" POST requests exist (user submitted form)
@@ -92,9 +109,9 @@ def login():
                 session['loggedin'] = True
                 session['id'] = account['id']
                 session['username'] = account['username']
-                return 'You have successfully logged in'
+                return gettext('You have successfully logged in')
             else:
-                msg = 'Incorrect password!'
+                msg = gettext('Incorrect password!')
         else:
-            msg = 'Incorrect Username!'
-    return render_template('en/login.html', msg=msg)
+            msg = gettext('Incorrect Username!')
+    return render_template('login.html', msg=msg)

@@ -1,5 +1,5 @@
 import unittest   # The test framework
-from flask_login import current_user
+#from flask_login import current_user
 
 from main import app
 class BasicTestCase(unittest.TestCase):
@@ -19,7 +19,7 @@ class BasicTestCase(unittest.TestCase):
         with app.test_client(self):
             response = app.test_client(self).post(
                 '/login/',
-                data=dict(username="par", password="par"),
+                data=dict(username="Sam", password="1234"),
                 follow_redirects=True
             )
             self.assertIn(b'You have successfully logged in', response.data)
@@ -28,7 +28,7 @@ class BasicTestCase(unittest.TestCase):
         with app.test_client(self):
             response = app.test_client(self).post(
                 '/login/',
-                data=dict(username="par", password="Michael"),
+                data=dict(username="Sam", password="Michael"),
                 follow_redirects=True
             )
             self.assertIn(b'Incorrect password!', response.data)
@@ -60,7 +60,7 @@ class BasicTestCase(unittest.TestCase):
     def test_user_registeration(self):
         with app.test_client(self):
             response = app.test_client(self).post('/register/', data=dict(
-            username='feiz', email='feiz@realpython.com',
+            username='Lily', email='lily@realpython.com',
             password='1234'
             ), follow_redirects=True)
             self.assertIn(b'You have successfully registered!', response.data)
