@@ -61,38 +61,62 @@ def change_language():
 def index():
     return redirect('/livinggreen/')
 
-
-
-
-@app.route('/login/', methods=['GET', 'POST'])
+# http://localhost:5000/livinggreen/ - this will be the login page, we need to use both GET and POST requests
+@app.route('/livinggreen/', methods=['GET', 'POST'])
 def login():
-    # if you're logged in you should not be able to see the login page
-    if 'loggedin' in session:
-        return gettext('You are already logged in')
-    # Output message if something goes wrong...
-    msg = ''
-    # Check if "username" and "password" POST requests exist (user submitted form)
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        # Create variables for easy access
-        username = request.form['username']
-        password = request.form['password']
-        # Check if account exists using MySQL
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        result = cursor.execute('SELECT * FROM accounts WHERE username = %s', [username])
-        # Fetch one record and return result
-        if result > 0:
-            account = cursor.fetchone()
-            password1 = account['password']
-            if bcrypt.check_password_hash(password1, password):
-                session['loggedin'] = True
-                session['id'] = account['id']
-                session['username'] = account['username']
-                return gettext('You have successfully logged in')
-            else:
-                msg = gettext('Incorrect password!')
-        else:
-            msg = gettext('Incorrect Username!')
-    return render_template('login.html', msg=msg)
+	# Redirect user to home page if logged-in
+	if loggedin():
+		return redirect(url_for('home'))
+	# Output message if something goes wrong...
+	msg = ''
+	# Check if "username" and "password" POST requests exist (user submitted form)
+	if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'token' in request.form:
+		# Create variables for easy access
+		username = request.form['username']
+		password = request.form['password']
+		token = request.form['token']
+		# Retrieve the hashed password
+		hash = password + app.secret_key
+		hash = hashlib.sha1(hash.encode())
+		password = hash.hexdigest();
+		# Check if account exists using MySQL
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
+		# Fetch one record and return result
+		account = cursor.fetchone()
+		# If account exists in accounts table in out database
+		if account:
+			if account_activation_required and account['activation_code'] != 'activated' and account['activation_code'] != '':
+				return gettext('Please activate your account to login!')
+			if csrf_protection and str(token) != str(session['token']):
+				return gettext('Invalid token!')
+			# Create session data, we can access this data in other routes
+			session['loggedin'] = True
+			session['id'] = account['id']
+			session['username'] = account['username']
+			
+			if 'rememberme' in request.form:
+				# Create hash to store as cookie
+				hash = account['username'] + request.form['password'] + app.secret_key
+				hash = hashlib.sha1(hash.encode())
+				hash = hash.hexdigest();
+				# the cookie expires in 90 days
+				expire_date = datetime.datetime.now() + datetime.timedelta(days=90)
+				resp = make_response('Success', 200)
+				resp.set_cookie('rememberme', hash, expires=expire_date)
+				# Update rememberme in accounts table to the cookie hash
+				cursor.execute('UPDATE accounts SET rememberme = %s WHERE id = %s', (hash, account['id'],))
+				mysql.connection.commit()
+				return resp
+			return 'Success'
+		else:
+			# Account doesnt exist or username/password incorrect
+			return gettext('Incorrect username/password!')
+	# Generate random token that will prevent CSRF attacks
+	token = uuid.uuid4()
+	session['token'] = token
+	# Show the login form with message (if any)
+	return render_template('index.html', msg=msg, token=token)
 
 # http://localhost:5000/livinggreen/register - this will be the registration page, we need to use both GET and POST requests
 @app.route('/livinggreen/register', methods=['GET', 'POST'])
@@ -158,6 +182,72 @@ def register():
 		return gettext('Please fill out the form!')
 	# Show registration form with message (if any)
 	return render_template('register.html', msg=msg)
+
+
+
+
+
+
+
+
+# http://localhost:5000/livinggreen/forgotpassword - user can use this page if they have forgotten their password
+@app.route('/livinggreen/forgotpassword', methods=['GET', 'POST'])
+def forgotpassword():
+	msg = ''
+	if request.method == 'POST' and 'email' in request.form:
+		email = request.form['email']
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute('SELECT * FROM accounts WHERE email = %s', (email,))
+		account = cursor.fetchone()
+		if account:
+			# Generate unique ID
+			reset_code = uuid.uuid4()
+			# Update the reset column in the accounts table to reflect the generated ID
+			cursor.execute('UPDATE accounts SET reset = %s WHERE email = %s', (reset_code, email,))
+			mysql.connection.commit()
+			# Change your_email@gmail.com
+			email_info = Message('Password Reset', sender = app.config['MAIL_USERNAME'], recipients = [email])
+			# Generate reset password link
+			reset_link = app.config['DOMAIN'] + url_for('resetpassword', email = email, code = str(reset_code))
+			# change the email body below
+			email_info.body = 'Please click the following link to reset your password: ' + str(reset_link)
+			email_info.html = '<p>Please click the following link to reset your password: <a href="' + str(reset_link) + '">' + str(reset_link) + '</a></p>'
+			mail.send(email_info)
+			msg = gettext('Reset password link has been sent to your email!')
+		else:
+			msg = gettext('An account with that email does not exist!')
+	return render_template('forgotpassword.html', msg=msg)
+
+# http://localhost:5000/livinggreen/resetpassword/EMAIL/CODE - proceed to reset the user's password
+@app.route('/livinggreen/resetpassword/<string:email>/<string:code>', methods=['GET', 'POST'])
+def resetpassword(email, code):
+	msg = ''
+	cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+	# Retrieve the account with the email and reset code provided from the GET request
+	cursor.execute('SELECT * FROM accounts WHERE email = %s AND reset = %s', (email, code,))
+	account = cursor.fetchone()
+	# If account exists
+	if account:
+		# Check if the new password fields were submitted
+		if request.method == 'POST' and 'npassword' in request.form and 'cpassword' in request.form:
+			npassword = request.form['npassword']
+			cpassword = request.form['cpassword']
+			# Password fields must match
+			if npassword == cpassword and npassword != "":
+				# Hash new password
+				hash = npassword + app.secret_key
+				hash = hashlib.sha1(hash.encode())
+				npassword = hash.hexdigest();
+				# Update the user's password
+				cursor.execute('UPDATE accounts SET password = %s, reset = "" WHERE email = %s', (npassword, email,))
+				mysql.connection.commit()
+				msg = gettext('Your password has been reset, you can now <a href="') + url_for('login') + '">login</a>!'
+			else:
+				msg = gettext('Passwords must match and must not be empty!')
+		return render_template('resetpassword.html', msg=msg, email=email, code=code)
+	return gettext('Invalid email and/or code!')
+
+
 
 
 # Check if logged in function, update session if cookie for "remember me" exists
