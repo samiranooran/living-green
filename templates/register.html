@@ -1,21 +1,32 @@
-<!-- Registration form created with HTML5 and CSS3. -->
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1">
 		<title>{{ gettext('Register') }}</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="{{ url_for('static', filename='script.js') }}"></script>
 	</head>
-	<body>
+	<body class="background-forest">
+		<!-- store session['language'] which get from main-->
+		<p style="display: none;" id="ln">{{session['language']}}</p>
+
 		<div class="register">
+			<a href="{{ url_for('change_language') }}?ln=en" data-lang="En" class="w3-btn w3-green" style="margin-left: 19px; margin-top: 20px;">English</a>
+			<a href="{{ url_for('change_language') }}?ln=fr" data-lang="Fr" class="w3-btn w3-green" style="margin-left: 2px; margin-top: 20px;">Français</a>
+			
+			<!-- accessibility feature -->
+			<button onclick="startSpeechSynthesis()" class="w3-btn w3-green  fas fa-volume-up" style="float:right;margin-right: 19px; margin-top: 20px;"></button>
+			
 			<h1>{{ gettext('Register') }}</h1>
 			<div class="links">
 				<a href="{{ url_for('login') }}">{{ gettext('Login') }}</a>
 				<a href="{{ url_for('register') }}" class="active">{{ gettext('Register') }}</a>
 			</div>
-			<form action="{{ url_for('register') }}" method="post" autocomplete="off">
+			<form class="ajax-form" action="{{ url_for('register') }}" method="post" autocomplete="off">
 				<label for="username">
 					<i class="fas fa-user"></i>
 				</label>
@@ -24,6 +35,10 @@
 					<i class="fas fa-lock"></i>
 				</label>
 				<input type="password" name="password" placeholder="{{ gettext('Password') }}" id="password" required>
+				<label for="cpassword">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="cpassword" placeholder="{{ gettext('Confirm Password') }}" id="cpassword" required>
 				<label for="email">
 					<i class="fas fa-envelope"></i>
 				</label>

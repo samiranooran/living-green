@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-24 13:19-0400\n"
+"POT-Creation-Date: 2021-10-24 18:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,61 +17,202 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: main.py:68
-msgid "Account already exists!"
+#: main.py:89
+msgid "Please activate your account to login!"
 msgstr ""
 
-#: main.py:70
-msgid "Invalid email address!"
+#: main.py:91
+msgid "Invalid token!"
 msgstr ""
 
-#: main.py:72
-msgid "Username must contain only characters and numbers!"
-msgstr ""
-
-#: main.py:74 main.py:83
-msgid "Please fill out the form!"
-msgstr ""
-
-#: main.py:80
-msgid "You have successfully registered!"
-msgstr ""
-
-#: main.py:92
-msgid "You are already logged in"
-msgstr ""
-
-#: main.py:111
-msgid "You have successfully logged in"
+#: main.py:110
+msgid "Success"
 msgstr ""
 
 #: main.py:113
-msgid "Incorrect password!"
+msgid "Incorrect username/password!"
 msgstr ""
 
-#: main.py:115
-msgid "Incorrect Username!"
+#: main.py:145
+msgid "Account already exists!"
 msgstr ""
 
-#: templates/login.html:6 templates/login.html:12 templates/login.html:14
-#: templates/login.html:27 templates/register.html:15
+#: main.py:147 main.py:249
+msgid "Invalid email address!"
+msgstr ""
+
+#: main.py:149 main.py:251
+msgid "Username must contain only characters and numbers!"
+msgstr ""
+
+#: main.py:151 main.py:181 main.py:253
+msgid "Please fill out the form!"
+msgstr ""
+
+#: main.py:153
+msgid "Passwords do not match!"
+msgstr ""
+
+#: main.py:155 main.py:257
+msgid "Username must be between 5 and 20 characters long!"
+msgstr ""
+
+#: main.py:157 main.py:259
+msgid "Password must be between 5 and 20 characters long!"
+msgstr ""
+
+#: main.py:173
+msgid "Please check your email to activate your account!"
+msgstr ""
+
+#: main.py:178
+msgid "You have successfully registered!"
+msgstr ""
+
+#: main.py:188
+msgid "Account doesn't exist with that email or the activation code is incorrect!"
+msgstr ""
+
+#: main.py:255
+msgid "Username already exists!"
+msgstr ""
+
+#: main.py:272
+msgid "Updated!"
+msgstr ""
+
+#: main.py:302
+msgid "Reset password link has been sent to your email!"
+msgstr ""
+
+#: main.py:304
+msgid "An account with that email does not exist!"
+msgstr ""
+
+#: main.py:330
+msgid "Your password has been reset, you can now <a href=\""
+msgstr ""
+
+#: main.py:332
+msgid "Passwords must match and must not be empty!"
+msgstr ""
+
+#: main.py:334
+msgid "Invalid email and/or code!"
+msgstr ""
+
+#: templates/activate.html:6
+msgid "Activate Account"
+msgstr ""
+
+#: templates/activation-email-template.html:4
+#: templates/activation-email-template.html:10
+msgid "Account Activation Required"
+msgstr ""
+
+#: templates/activation-email-template.html:11
+msgid "Click"
+msgstr ""
+
+#: templates/activation-email-template.html:11
+msgid "here"
+msgstr ""
+
+#: templates/activation-email-template.html:11
+msgid "to activate your account."
+msgstr ""
+
+#: templates/forgotpassword.html:6 templates/forgotpassword.html:12
+msgid "Forgot Password"
+msgstr ""
+
+#: templates/forgotpassword.html:17
+msgid "Your Email"
+msgstr ""
+
+#: templates/forgotpassword.html:19 templates/resetpassword.html:23
+msgid "Submit"
+msgstr ""
+
+#: templates/home.html:6
+msgid "Home Page"
+msgstr ""
+
+#: templates/home.html:7
+msgid "Welcome back"
+msgstr ""
+
+#: templates/index.html:6 templates/index.html:16 templates/index.html:18
+#: templates/index.html:36 templates/register.html:18
 msgid "Login"
 msgstr ""
 
-#: templates/login.html:15 templates/register.html:7 templates/register.html:13
-#: templates/register.html:16 templates/register.html:32
+#: templates/index.html:19 templates/register.html:6 templates/register.html:16
+#: templates/register.html:19 templates/register.html:39
 msgid "Register"
 msgstr ""
 
-#: templates/login.html:21 templates/register.html:22
+#: templates/index.html:25 templates/profile-edit.html:10
+#: templates/profile-edit.html:11 templates/profile.html:11
+#: templates/register.html:25
 msgid "Username"
 msgstr ""
 
-#: templates/login.html:25 templates/register.html:26
+#: templates/index.html:29 templates/register.html:29
 msgid "Password"
 msgstr ""
 
-#: templates/register.html:30
+#: templates/index.html:31
+msgid "Remember me"
+msgstr ""
+
+#: templates/index.html:33
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/layout.html:14
+msgid "Home"
+msgstr ""
+
+#: templates/layout.html:15
+msgid "Profile"
+msgstr ""
+
+#: templates/layout.html:19
+msgid "Logout"
+msgstr ""
+
+#: templates/profile-edit.html:6 templates/profile.html:19
+msgid "Edit Profile"
+msgstr ""
+
+#: templates/profile-edit.html:12 templates/profile-edit.html:13
+#: templates/resetpassword.html:17
+msgid "New Password"
+msgstr ""
+
+#: templates/profile-edit.html:14 templates/profile-edit.html:15
+#: templates/profile.html:15 templates/register.html:37
 msgid "Email"
+msgstr ""
+
+#: templates/profile-edit.html:17
+msgid "Save"
+msgstr ""
+
+#: templates/profile.html:6
+msgid "Profile Page"
+msgstr ""
+
+#: templates/profile.html:8
+msgid "Your account details are below:"
+msgstr ""
+
+#: templates/register.html:33 templates/resetpassword.html:21
+msgid "Confirm Password"
+msgstr ""
+
+#: templates/resetpassword.html:6 templates/resetpassword.html:12
+msgid "Reset Password"
 msgstr ""
 
