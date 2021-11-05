@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<h2>{{ gettext('Edit Profile') }}</h2>
+<div>
+    <div>
+        <form action="{{ url_for('edit_profile') }}" method="post">
+            <label for="username">{{ gettext('Username') }}</label>
+            <input type="text" value="{{ account['username'] }}" name="username" id="username" placeholder="{{ gettext('Username') }}">
+            <label for="password">{{ gettext('New Password') }}</label>
+            <input type="password" value="" name="password" id="password" placeholder="{{ gettext('New Password') }}">
+            <label for="email">{{ gettext('Email') }}</label>
+            <input type="email" value="{{ account['email'] }}" name="email" id="email" placeholder="{{ gettext('Email') }}">
+            <br>
+            <input type="submit" value="{{ gettext('Save') }}">
+        </form>
+        <p>{{ msg }}</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<h2>{{ gettext('Profile Page') }}</h2>
+<div>
+    <p>{{ gettext('Your account details are below:') }}</p>
+    <table>
+        <tr>
+            <td>{{ gettext('Username') }}:</td>
+            <td>{{ account['username'] }}</td>
+        </tr>
+        <tr>
+            <td>{{ gettext('Email') }}:</td>
+            <td>{{ account['email'] }}</td>
+        </tr>
+    </table>
+    <a href="{{ url_for('edit_profile') }}">{{ gettext('Edit Profile') }}</a>
+</div>
+{% endblock %}

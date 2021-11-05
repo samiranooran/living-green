@@ -217,6 +217,70 @@ def forgotpassword():
 		else:
 			msg = gettext('An account with that email does not exist!')
 	return render_template('forgotpassword.html', msg=msg)
+    
+# http://localhost:5000/livinggreen/profile - this will be the profile page, only accessible for loggedin users
+@app.route('/livinggreen/profile')
+def profile():
+	# Check if user is loggedin
+	if loggedin():
+		# We need all the account info for the user so we can display it on the profile page
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
+		account = cursor.fetchone()
+		# Show the profile page with account info
+		return render_template('profile.html', account=account)
+	# User is not loggedin redirect to login page
+	return redirect(url_for('login'))
+
+# http://localhost:5000/livinggreen/profile/edit - user can edit their existing details
+@app.route('/livinggreen/profile/edit', methods=['GET', 'POST'])
+def edit_profile():
+	# Check if user is loggedin
+	if loggedin():
+		# We need all the account info for the user so we can display it on the profile page
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		# Output message
+		msg = ''
+		# Check if "username", "password" and "email" POST requests exist (user submitted form)
+		if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
+			# Create variables for easy access
+			username = request.form['username']
+			password = request.form['password']
+			email = request.form['email']
+			# Retrieve account by the username
+			cursor.execute('SELECT * FROM accounts WHERE username = %s', (username,))
+			account = cursor.fetchone()
+			# validation check
+			if not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+				msg = gettext('Invalid email address!')
+			elif not re.match(r'[A-Za-z0-9]+', username):
+				msg = gettext('Username must contain only characters and numbers!')
+			elif not username or not email:
+				msg = gettext('Please fill out the form!')
+			elif session['username'] != username and account:
+				msg = gettext('Username already exists!')
+			elif len(username) < 5 or len(username) > 20:
+				return gettext('Username must be between 5 and 20 characters long!')
+			elif len(password) < 5 or len(password) > 20:
+				return gettext('Password must be between 5 and 20 characters long!')
+			else:
+				cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
+				account = cursor.fetchone()
+				current_password = account['password']
+				if password:
+					# Hash the password
+					hash = password + app.secret_key
+					hash = hashlib.sha1(hash.encode())
+					current_password = hash.hexdigest();
+				# update account with the new details
+				cursor.execute('UPDATE accounts SET username = %s, password = %s, email = %s WHERE id = %s', (username, current_password, email, session['id'],))
+				mysql.connection.commit()
+				msg = gettext('Updated!')
+		cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
+		account = cursor.fetchone()
+		# Show the profile page with account info
+		return render_template('profile-edit.html', account=account, msg=msg)
+	return redirect(url_for('login'))
 
 # http://localhost:5000/livinggreen/resetpassword/EMAIL/CODE - proceed to reset the user's password
 @app.route('/livinggreen/resetpassword/<string:email>/<string:code>', methods=['GET', 'POST'])
