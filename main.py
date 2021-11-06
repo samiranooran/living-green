@@ -183,35 +183,35 @@ def register():
 	# Show registration form with message (if any)
 	return render_template('register.html', msg=msg)
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+# http://localhost:5000/livinggreen/activate/<email>/<code> - this page will activate a users account if the correct activation code and email are provided
+@app.route('/livinggreen/activate/<string:email>/<string:code>', methods=['GET'])
+def activate(email, code):
+	msg = gettext('Account doesn\'t exist with that email or the activation code is incorrect!')
+	# Check if the email and code provided exist in the accounts table
+	cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+	cursor.execute('SELECT * FROM accounts WHERE email = %s AND activation_code = %s', (email, code,))
+	account = cursor.fetchone()
+	if account:
+		# account exists, update the activation code to "activated"
+		cursor.execute('UPDATE accounts SET activation_code = "activated" WHERE email = %s AND activation_code = %s', (email, code,))
+		mysql.connection.commit()
+		# automatically log the user in and redirect to the home page
+		session['loggedin'] = True
+		session['id'] = account['id']
+		session['username'] = account['username']
+		
+		return redirect(url_for('home'))
+	return render_template('activate.html', msg=msg)
+
+# http://localhost:5000/livinggreen/home - this will be the home page, only accessible for loggedin users
+@app.route('/livinggreen/home')
+def home():
+	# Check if user is loggedin
+	if loggedin():
+		# User is loggedin show them the home page
+		return render_template('home.html', username=session['username'])
+	# User is not loggedin redirect to login page
+	return redirect(url_for('login'))   
 
 # http://localhost:5000/livinggreen/profile - this will be the profile page, only accessible for loggedin users
 @app.route('/livinggreen/profile')
