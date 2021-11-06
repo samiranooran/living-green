@@ -4,19 +4,29 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1">
 		<title>{% block title %}{% endblock %}</title>
+		<!-- add jQuery  -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+		<!-- add css  -->
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<!-- add script ref -->
+		<script src="{{ url_for('static', filename='speech_layout.js') }}"></script>
 	</head>
 	<body class="loggedin">
+		<!-- accessibility feature -->
+		<button onclick="speak()" class="w3-btn w3-green  fas fa-volume-up" style="float:right;margin-right: 19px; margin-top: 20px;"></button>
+		
 		<nav class="navtop">
 			<div>
-				<h1><img src="/static/livinggreenlogo.png" alt="logo" style="width:30px;height:30px;"/>&nbsp;Living Green</h1>
-                <a href="{{ url_for('home') }}"><i class="fas fa-home"></i>{{ gettext('Home') }}</a>
-				<a href="{{ url_for('profile') }}"><i class="fas fa-user-circle"></i>{{ gettext('Profile') }}</a>
+				<h1><img src="/static/logo.PNG" alt="logo" style="width:50px;height:50px;"/>&nbsp;Living Green</h1>
+                <a href="{{ url_for('home') }}" ><i class="fas fa-home"></i>{{ gettext('Home') }}</a>
+				<a href="{{ url_for('profile') }}" ><i class="fas fa-user-circle"></i>{{ gettext('Profile') }}</a>
 				{% if role == 'Admin' %}
-				<a href="{{ url_for('admin') }}"><i class="fas fa-cog"></i>Admin</a>
+				<a href="{{ url_for('admin') }}" ><i class="fas fa-cog"></i>Admin</a>
 				{% endif %}
-				<a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>{{ gettext('Logout') }}</a>
+				<a href="{{ url_for('logout') }}" ><i class="fas fa-sign-out-alt"></i>{{ gettext('Logout') }}</a>
 			</div>
 		</nav>
 		<div class="content">
