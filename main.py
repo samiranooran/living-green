@@ -333,3 +333,19 @@ def loggedin():
 	# account not logged in return false
 	return False
 
+# http://localhost:5000/livinggreen/logout - this will be the logout page
+@app.route('/livinggreen/logout')
+def logout():
+	# Remove session data, this will log the user out
+	session.pop('loggedin', None)
+	session.pop('id', None)
+	session.pop('username', None)
+	
+	# Remove cookie data "remember me"
+	resp = make_response(redirect(url_for('login')))
+	resp.set_cookie('rememberme', expires=0)
+	return resp
+
+if __name__ == '__main__':
+	app.debug = True
+	app.run()
