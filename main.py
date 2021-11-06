@@ -183,41 +183,36 @@ def register():
 	# Show registration form with message (if any)
 	return render_template('register.html', msg=msg)
 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 
-
-
-
-
-
-
-# http://localhost:5000/livinggreen/forgotpassword - user can use this page if they have forgotten their password
-@app.route('/livinggreen/forgotpassword', methods=['GET', 'POST'])
-def forgotpassword():
-	msg = ''
-	if request.method == 'POST' and 'email' in request.form:
-		email = request.form['email']
-		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-		cursor.execute('SELECT * FROM accounts WHERE email = %s', (email,))
-		account = cursor.fetchone()
-		if account:
-			# Generate unique ID
-			reset_code = uuid.uuid4()
-			# Update the reset column in the accounts table to reflect the generated ID
-			cursor.execute('UPDATE accounts SET reset = %s WHERE email = %s', (reset_code, email,))
-			mysql.connection.commit()
-			# Change your_email@gmail.com
-			email_info = Message('Password Reset', sender = app.config['MAIL_USERNAME'], recipients = [email])
-			# Generate reset password link
-			reset_link = app.config['DOMAIN'] + url_for('resetpassword', email = email, code = str(reset_code))
-			# change the email body below
-			email_info.body = 'Please click the following link to reset your password: ' + str(reset_link)
-			email_info.html = '<p>Please click the following link to reset your password: <a href="' + str(reset_link) + '">' + str(reset_link) + '</a></p>'
-			mail.send(email_info)
-			msg = gettext('Reset password link has been sent to your email!')
-		else:
-			msg = gettext('An account with that email does not exist!')
-	return render_template('forgotpassword.html', msg=msg)
-    
 # http://localhost:5000/livinggreen/profile - this will be the profile page, only accessible for loggedin users
 @app.route('/livinggreen/profile')
 def profile():
@@ -282,6 +277,34 @@ def edit_profile():
 		return render_template('profile-edit.html', account=account, msg=msg)
 	return redirect(url_for('login'))
 
+# http://localhost:5000/livinggreen/forgotpassword - user can use this page if they have forgotten their password
+@app.route('/livinggreen/forgotpassword', methods=['GET', 'POST'])
+def forgotpassword():
+	msg = ''
+	if request.method == 'POST' and 'email' in request.form:
+		email = request.form['email']
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute('SELECT * FROM accounts WHERE email = %s', (email,))
+		account = cursor.fetchone()
+		if account:
+			# Generate unique ID
+			reset_code = uuid.uuid4()
+			# Update the reset column in the accounts table to reflect the generated ID
+			cursor.execute('UPDATE accounts SET reset = %s WHERE email = %s', (reset_code, email,))
+			mysql.connection.commit()
+			# Change your_email@gmail.com
+			email_info = Message('Password Reset', sender = app.config['MAIL_USERNAME'], recipients = [email])
+			# Generate reset password link
+			reset_link = app.config['DOMAIN'] + url_for('resetpassword', email = email, code = str(reset_code))
+			# change the email body below
+			email_info.body = 'Please click the following link to reset your password: ' + str(reset_link)
+			email_info.html = '<p>Please click the following link to reset your password: <a href="' + str(reset_link) + '">' + str(reset_link) + '</a></p>'
+			mail.send(email_info)
+			msg = gettext('Reset password link has been sent to your email!')
+		else:
+			msg = gettext('An account with that email does not exist!')
+	return render_template('forgotpassword.html', msg=msg)
+
 # http://localhost:5000/livinggreen/resetpassword/EMAIL/CODE - proceed to reset the user's password
 @app.route('/livinggreen/resetpassword/<string:email>/<string:code>', methods=['GET', 'POST'])
 def resetpassword(email, code):
@@ -311,8 +334,18 @@ def resetpassword(email, code):
 		return render_template('resetpassword.html', msg=msg, email=email, code=code)
 	return gettext('Invalid email and/or code!')
 
-
-
+# http://localhost:5000/livinggreen/logout - this will be the logout page
+@app.route('/livinggreen/logout')
+def logout():
+	# Remove session data, this will log the user out
+	session.pop('loggedin', None)
+	session.pop('id', None)
+	session.pop('username', None)
+	
+	# Remove cookie data "remember me"
+	resp = make_response(redirect(url_for('login')))
+	resp.set_cookie('rememberme', expires=0)
+	return resp
 
 # Check if logged in function, update session if cookie for "remember me" exists
 def loggedin():
@@ -333,18 +366,6 @@ def loggedin():
 	# account not logged in return false
 	return False
 
-# http://localhost:5000/livinggreen/logout - this will be the logout page
-@app.route('/livinggreen/logout')
-def logout():
-	# Remove session data, this will log the user out
-	session.pop('loggedin', None)
-	session.pop('id', None)
-	session.pop('username', None)
-	
-	# Remove cookie data "remember me"
-	resp = make_response(redirect(url_for('login')))
-	resp.set_cookie('rememberme', expires=0)
-	return resp
 
 if __name__ == '__main__':
 	app.debug = True
