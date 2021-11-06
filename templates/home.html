@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h2>{{ gettext('Home Page') }}</h2>
+
+<p id="greeting">{{ gettext('Welcome back') }}, {{ username }}!</p>
+
+{% endblock %}
