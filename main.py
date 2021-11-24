@@ -209,9 +209,28 @@ def home():
 	# Check if user is loggedin
 	if loggedin():
 		# User is loggedin show them the home page
-		return render_template('home.html', username=session['username'])
+		#if request.method == 'POST' and 'email' in request.form:
+		#	email = request.form['email']
+		#	cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		#	cursor.execute('SELECT * FROM users WHERE emailid = %s', (email,))
+		#	val = cursor.fetchone()
+		# We need all the account info for the user so we can display it on the profile page
+		#cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+		#if request.method == 'POST':
+		#	global value
+		#	email = request.form['email']
+		#	cursor.execute('SELECT * FROM users WHERE emailid = %s', (email,))
+		#	value = cursor.fetchone()
+		cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+		cursor.execute('SELECT * FROM accounts WHERE id = %s', (session['id'],))
+		account = cursor.fetchone()
+
+		cursor.execute('SELECT * FROM users WHERE emailid = %s', (account['email'],))
+		val = cursor.fetchone()
+		return render_template('home.html', val=val, account=account)
 	# User is not loggedin redirect to login page
-	return redirect(url_for('login'))   
+	return redirect(url_for('login'))
 
 # http://localhost:5000/livinggreen/profile - this will be the profile page, only accessible for loggedin users
 @app.route('/livinggreen/profile')

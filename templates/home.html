@@ -2,7 +2,42 @@
 
 {% block title %}Home{% endblock %}
 
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='progress.css') }}">
+{% endblock %}
+
 {% block content %}
 <h2>{{ gettext('Home Page') }}</h2>
-<p id="greeting">{{ gettext('Welcome back') }}, {{ username }}!</p>
-{% endblock %}
+<p>{{ gettext('Welcome back') }}, {{ account["username"] }}!</p>
+<div style="display: flex; justify-content: space-between;">
+    <div>
+        <div>
+            <p>{{ gettext('Your waste details are below:') }}</p>
+            <table>
+                <tr>
+                    <td>{{ gettext('Recyclables') }}:</td>
+                    <td>{{ val['recyclables'] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ gettext('Garbage') }}:</td>
+                    <td>{{ val['garbage'] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ gettext('Compost Organics') }}:</td>
+                    <td>{{ val['compostorganics'] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ gettext('Renewable Energy') }}:</td>
+                    <td>{{ val['renewableenergy'] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ gettext('Green House Gas') }}:</td>
+                    <td>{{ val['greenhousegas'] }}</td>
+                </tr>
+                <tr>
+                    <td>{{ gettext('Email') }}:</td>
+                    <td>{{ val['emailid'] }}</td>
+                </tr>
+            </table>
+        </div>
+        
