@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-24 18:25-0400\n"
+"POT-Creation-Date: 2021-11-24 17:27-0500\n"
 "PO-Revision-Date: 2021-10-24 18:31-0400\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -18,172 +18,178 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: main.py:89
+#: main.py:90
 msgid "Please activate your account to login!"
 msgstr "Veuillez activer votre compte pour vous connecter !"
 
-#: main.py:91
+#: main.py:92
 msgid "Invalid token!"
 msgstr "Jeton invalide!"
 
-#: main.py:110
-msgid "Success"
-msgstr "Succès"
-
-#: main.py:113
+#: main.py:114
 msgid "Incorrect username/password!"
 msgstr "Nom d'utilisateur / Mot de passe incorrect!"
 
-#: main.py:145
+#: main.py:146
 msgid "Account already exists!"
 msgstr "Le compte existe déjà!"
 
-#: main.py:147 main.py:249
+#: main.py:148 main.py:269
 msgid "Invalid email address!"
 msgstr "Adresse e-mail invalide!"
 
-#: main.py:149 main.py:251
+#: main.py:150 main.py:271
 msgid "Username must contain only characters and numbers!"
 msgstr "Le nom d'utilisateur ne doit contenir que des caractères et des chiffres !"
 
-#: main.py:151 main.py:181 main.py:253
+#: main.py:152 main.py:182 main.py:273
 msgid "Please fill out the form!"
 msgstr "Veuillez remplir le formulaire !"
 
-#: main.py:153
+#: main.py:154
 msgid "Passwords do not match!"
 msgstr "Les mots de passe ne correspondent pas!"
 
-#: main.py:155 main.py:257
+#: main.py:156 main.py:277
 msgid "Username must be between 5 and 20 characters long!"
 msgstr "Le nom d'utilisateur doit comporter entre 5 et 20 caractères !"
 
-#: main.py:157 main.py:259
+#: main.py:158 main.py:279
 msgid "Password must be between 5 and 20 characters long!"
 msgstr "Le mot de passe doit comporter entre 5 et 20 caractères !"
 
-#: main.py:173
+#: main.py:174
 msgid "Please check your email to activate your account!"
 msgstr "Veuillez vérifier votre email pour activer votre compte !"
 
-#: main.py:178
+#: main.py:179
 msgid "You have successfully registered!"
 msgstr "Vous vous êtes inscrit avec succès !"
 
-#: main.py:188
+#: main.py:189
 msgid "Account doesn't exist with that email or the activation code is incorrect!"
 msgstr ""
 "Le compte n'existe pas avec cet e-mail ou le code d'activation est "
 "incorrect !"
 
-#: main.py:255
+#: main.py:275
 msgid "Username already exists!"
 msgstr "Ce nom d'utilisateur existe déjà!"
 
-#: main.py:272
+#: main.py:292
 msgid "Updated!"
 msgstr "Mis à jour!"
 
-#: main.py:302
+#: main.py:322
 msgid "Reset password link has been sent to your email!"
 msgstr ""
 "Le lien de réinitialisation du mot de passe a été envoyé à votre adresse "
 "e-mail !"
 
-#: main.py:304
+#: main.py:324
 msgid "An account with that email does not exist!"
 msgstr "Un compte avec cet email n'existe pas !"
 
-#: main.py:330
+#: main.py:350
 msgid "Your password has been reset, you can now <a href=\""
 msgstr "Votre mot de passe a été réinitialisé, vous pouvez maintenant <a href=\""
 
-#: main.py:332
+#: main.py:352
 msgid "Passwords must match and must not be empty!"
 msgstr "Les mots de passe doivent correspondre et ne doivent pas être vides !"
 
-#: main.py:334
+#: main.py:354
 msgid "Invalid email and/or code!"
 msgstr "E-mail et/ou code invalide !"
 
-#: templates/activate.html:6
-msgid "Activate Account"
-msgstr "Activer le compte"
-
-#: templates/activation-email-template.html:4
-#: templates/activation-email-template.html:10
-msgid "Account Activation Required"
-msgstr "Activation du compte requise"
-
-#: templates/activation-email-template.html:11
-msgid "Click"
-msgstr "Cliquez sur"
-
-#: templates/activation-email-template.html:11
-msgid "here"
-msgstr "ici"
-
-#: templates/activation-email-template.html:11
-msgid "to activate your account."
-msgstr "Pour activer votre compte."
-
-#: templates/forgotpassword.html:6 templates/forgotpassword.html:12
+#: templates/forgotpassword.html:6 templates/forgotpassword.html:22
 msgid "Forgot Password"
 msgstr "Mot de passe oublié"
 
-#: templates/forgotpassword.html:17
+#: templates/forgotpassword.html:27
 msgid "Your Email"
 msgstr "Votre e-mail"
 
-#: templates/forgotpassword.html:19 templates/resetpassword.html:23
+#: templates/forgotpassword.html:29 templates/resetpassword.html:23
 msgid "Submit"
 msgstr "Soumettre"
 
-#: templates/home.html:6
+#: templates/home.html:10
 msgid "Home Page"
 msgstr "Page d'accueil"
 
-#: templates/home.html:7
+#: templates/home.html:11
 msgid "Welcome back"
 msgstr "Content de te revoir"
 
-#: templates/index.html:6 templates/index.html:16 templates/index.html:18
-#: templates/index.html:36 templates/register.html:18
+#: templates/home.html:15
+#, fuzzy
+msgid "Your waste details are below:"
+msgstr "Les détails de votre compte sont ci-dessous :"
+
+#: templates/home.html:18 templates/home.html:45 templates/home.html:87
+msgid "Recyclables"
+msgstr "Recyclables"
+
+#: templates/home.html:22 templates/home.html:50 templates/home.html:88
+msgid "Garbage"
+msgstr "Des ordures"
+
+#: templates/home.html:26 templates/home.html:55 templates/home.html:89
+msgid "Compost Organics"
+msgstr "Compostage Organique"
+
+#: templates/home.html:30 templates/home.html:63 templates/home.html:90
+msgid "Renewable Energy"
+msgstr "Renewable Energy"
+
+#: templates/home.html:34 templates/home.html:68 templates/home.html:91
+msgid "Green House Gas"
+msgstr "Gaz à effet de serre"
+
+#: templates/home.html:38 templates/profile-edit.html:14
+#: templates/profile-edit.html:15 templates/profile.html:15
+#: templates/register.html:45
+msgid "Email"
+msgstr "E-mail"
+
+#: templates/index.html:6 templates/index.html:24 templates/index.html:26
+#: templates/index.html:44 templates/register.html:26
 msgid "Login"
 msgstr "Connexion"
 
-#: templates/index.html:19 templates/register.html:6 templates/register.html:16
-#: templates/register.html:19 templates/register.html:39
+#: templates/index.html:27 templates/register.html:6 templates/register.html:24
+#: templates/register.html:27 templates/register.html:47
 msgid "Register"
 msgstr "S'inscrire"
 
-#: templates/index.html:25 templates/profile-edit.html:10
+#: templates/index.html:33 templates/profile-edit.html:10
 #: templates/profile-edit.html:11 templates/profile.html:11
-#: templates/register.html:25
+#: templates/register.html:33
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: templates/index.html:29 templates/register.html:29
+#: templates/index.html:37 templates/register.html:37
 msgid "Password"
 msgstr "Mot de passe"
 
-#: templates/index.html:31
+#: templates/index.html:39
 msgid "Remember me"
 msgstr "Souviens-toi de moi"
 
-#: templates/index.html:33
+#: templates/index.html:41
 msgid "Forgot Password?"
 msgstr "Mot de passe oublié?"
 
-#: templates/layout.html:14
+#: templates/layout.html:25
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/layout.html:15
+#: templates/layout.html:26
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/layout.html:19
+#: templates/layout.html:30
 msgid "Logout"
 msgstr "Se déconnecter"
 
@@ -195,11 +201,6 @@ msgstr "Editer le profil"
 #: templates/resetpassword.html:17
 msgid "New Password"
 msgstr "nouveau mot de passe"
-
-#: templates/profile-edit.html:14 templates/profile-edit.html:15
-#: templates/profile.html:15 templates/register.html:37
-msgid "Email"
-msgstr "E-mail"
 
 #: templates/profile-edit.html:17
 msgid "Save"
@@ -213,11 +214,29 @@ msgstr "Page de profil"
 msgid "Your account details are below:"
 msgstr "Les détails de votre compte sont ci-dessous :"
 
-#: templates/register.html:33 templates/resetpassword.html:21
+#: templates/register.html:41 templates/resetpassword.html:21
 msgid "Confirm Password"
 msgstr "Confirmez le mot de passe"
 
 #: templates/resetpassword.html:6 templates/resetpassword.html:12
 msgid "Reset Password"
 msgstr "réinitialiser le mot de passe"
+
+#~ msgid "Success"
+#~ msgstr "Succès"
+
+#~ msgid "Activate Account"
+#~ msgstr "Activer le compte"
+
+#~ msgid "Account Activation Required"
+#~ msgstr "Activation du compte requise"
+
+#~ msgid "Click"
+#~ msgstr "Cliquez sur"
+
+#~ msgid "here"
+#~ msgstr "ici"
+
+#~ msgid "to activate your account."
+#~ msgstr "Pour activer votre compte."
 

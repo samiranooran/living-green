@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-10-24 18:25-0400\n"
+"POT-Creation-Date: 2021-11-24 17:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,168 +17,173 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: main.py:89
+#: main.py:90
 msgid "Please activate your account to login!"
 msgstr ""
 
-#: main.py:91
+#: main.py:92
 msgid "Invalid token!"
 msgstr ""
 
-#: main.py:110
-msgid "Success"
-msgstr ""
-
-#: main.py:113
+#: main.py:114
 msgid "Incorrect username/password!"
 msgstr ""
 
-#: main.py:145
+#: main.py:146
 msgid "Account already exists!"
 msgstr ""
 
-#: main.py:147 main.py:249
+#: main.py:148 main.py:269
 msgid "Invalid email address!"
 msgstr ""
 
-#: main.py:149 main.py:251
+#: main.py:150 main.py:271
 msgid "Username must contain only characters and numbers!"
 msgstr ""
 
-#: main.py:151 main.py:181 main.py:253
+#: main.py:152 main.py:182 main.py:273
 msgid "Please fill out the form!"
 msgstr ""
 
-#: main.py:153
+#: main.py:154
 msgid "Passwords do not match!"
 msgstr ""
 
-#: main.py:155 main.py:257
+#: main.py:156 main.py:277
 msgid "Username must be between 5 and 20 characters long!"
 msgstr ""
 
-#: main.py:157 main.py:259
+#: main.py:158 main.py:279
 msgid "Password must be between 5 and 20 characters long!"
 msgstr ""
 
-#: main.py:173
+#: main.py:174
 msgid "Please check your email to activate your account!"
 msgstr ""
 
-#: main.py:178
+#: main.py:179
 msgid "You have successfully registered!"
 msgstr ""
 
-#: main.py:188
+#: main.py:189
 msgid "Account doesn't exist with that email or the activation code is incorrect!"
 msgstr ""
 
-#: main.py:255
+#: main.py:275
 msgid "Username already exists!"
 msgstr ""
 
-#: main.py:272
+#: main.py:292
 msgid "Updated!"
 msgstr ""
 
-#: main.py:302
+#: main.py:322
 msgid "Reset password link has been sent to your email!"
 msgstr ""
 
-#: main.py:304
+#: main.py:324
 msgid "An account with that email does not exist!"
 msgstr ""
 
-#: main.py:330
+#: main.py:350
 msgid "Your password has been reset, you can now <a href=\""
 msgstr ""
 
-#: main.py:332
+#: main.py:352
 msgid "Passwords must match and must not be empty!"
 msgstr ""
 
-#: main.py:334
+#: main.py:354
 msgid "Invalid email and/or code!"
 msgstr ""
 
-#: templates/activate.html:6
-msgid "Activate Account"
-msgstr ""
-
-#: templates/activation-email-template.html:4
-#: templates/activation-email-template.html:10
-msgid "Account Activation Required"
-msgstr ""
-
-#: templates/activation-email-template.html:11
-msgid "Click"
-msgstr ""
-
-#: templates/activation-email-template.html:11
-msgid "here"
-msgstr ""
-
-#: templates/activation-email-template.html:11
-msgid "to activate your account."
-msgstr ""
-
-#: templates/forgotpassword.html:6 templates/forgotpassword.html:12
+#: templates/forgotpassword.html:6 templates/forgotpassword.html:22
 msgid "Forgot Password"
 msgstr ""
 
-#: templates/forgotpassword.html:17
+#: templates/forgotpassword.html:27
 msgid "Your Email"
 msgstr ""
 
-#: templates/forgotpassword.html:19 templates/resetpassword.html:23
+#: templates/forgotpassword.html:29 templates/resetpassword.html:23
 msgid "Submit"
 msgstr ""
 
-#: templates/home.html:6
+#: templates/home.html:10
 msgid "Home Page"
 msgstr ""
 
-#: templates/home.html:7
+#: templates/home.html:11
 msgid "Welcome back"
 msgstr ""
 
-#: templates/index.html:6 templates/index.html:16 templates/index.html:18
-#: templates/index.html:36 templates/register.html:18
+#: templates/home.html:15
+msgid "Your waste details are below:"
+msgstr ""
+
+#: templates/home.html:18 templates/home.html:45 templates/home.html:87
+msgid "Recyclables"
+msgstr ""
+
+#: templates/home.html:22 templates/home.html:50 templates/home.html:88
+msgid "Garbage"
+msgstr ""
+
+#: templates/home.html:26 templates/home.html:55 templates/home.html:89
+msgid "Compost Organics"
+msgstr ""
+
+#: templates/home.html:30 templates/home.html:63 templates/home.html:90
+msgid "Renewable Energy"
+msgstr ""
+
+#: templates/home.html:34 templates/home.html:68 templates/home.html:91
+msgid "Green House Gas"
+msgstr ""
+
+#: templates/home.html:38 templates/profile-edit.html:14
+#: templates/profile-edit.html:15 templates/profile.html:15
+#: templates/register.html:45
+msgid "Email"
+msgstr ""
+
+#: templates/index.html:6 templates/index.html:24 templates/index.html:26
+#: templates/index.html:44 templates/register.html:26
 msgid "Login"
 msgstr ""
 
-#: templates/index.html:19 templates/register.html:6 templates/register.html:16
-#: templates/register.html:19 templates/register.html:39
+#: templates/index.html:27 templates/register.html:6 templates/register.html:24
+#: templates/register.html:27 templates/register.html:47
 msgid "Register"
 msgstr ""
 
-#: templates/index.html:25 templates/profile-edit.html:10
+#: templates/index.html:33 templates/profile-edit.html:10
 #: templates/profile-edit.html:11 templates/profile.html:11
-#: templates/register.html:25
+#: templates/register.html:33
 msgid "Username"
 msgstr ""
 
-#: templates/index.html:29 templates/register.html:29
+#: templates/index.html:37 templates/register.html:37
 msgid "Password"
 msgstr ""
 
-#: templates/index.html:31
+#: templates/index.html:39
 msgid "Remember me"
 msgstr ""
 
-#: templates/index.html:33
+#: templates/index.html:41
 msgid "Forgot Password?"
 msgstr ""
 
-#: templates/layout.html:14
+#: templates/layout.html:25
 msgid "Home"
 msgstr ""
 
-#: templates/layout.html:15
+#: templates/layout.html:26
 msgid "Profile"
 msgstr ""
 
-#: templates/layout.html:19
+#: templates/layout.html:30
 msgid "Logout"
 msgstr ""
 
@@ -189,11 +194,6 @@ msgstr ""
 #: templates/profile-edit.html:12 templates/profile-edit.html:13
 #: templates/resetpassword.html:17
 msgid "New Password"
-msgstr ""
-
-#: templates/profile-edit.html:14 templates/profile-edit.html:15
-#: templates/profile.html:15 templates/register.html:37
-msgid "Email"
 msgstr ""
 
 #: templates/profile-edit.html:17
@@ -208,7 +208,7 @@ msgstr ""
 msgid "Your account details are below:"
 msgstr ""
 
-#: templates/register.html:33 templates/resetpassword.html:21
+#: templates/register.html:41 templates/resetpassword.html:21
 msgid "Confirm Password"
 msgstr ""
 

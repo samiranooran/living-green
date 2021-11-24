@@ -40,4 +40,92 @@
                 </tr>
             </table>
         </div>
-        
+        <div style="display: flex;  margin-top: 20px;">
+            <div style="text-align: center;">
+                <label>{{ gettext('Recyclables') }}</label>
+                <div role="progressbar"
+                     style="--value:{{ val['recyclables'] }}; --color: rgb(255, 99, 132); margin-right: 10px;"></div>
+            </div>
+            <div style="text-align: center;">
+                <label>{{ gettext('Garbage') }}</label>
+                <div role="progressbar"
+                     style="--value:{{ val['garbage'] }}; --color: rgb(54, 162, 235); margin-right: 10px;"></div>
+            </div>
+            <div style="text-align: center;">
+                <label>{{ gettext('Compost Organics') }}</label>
+                <div role="progressbar"
+                 style="--value:{{ val['compostorganics'] }}; --color: rgb(255, 205, 86); margin-right: 10px;"></div>
+            </div>
+
+        </div>
+        <div style="display: flex;  margin-top: 20px;">
+            <div style="text-align: center;">
+                <label>{{ gettext('Renewable Energy') }}</label>
+                <div role="progressbar"
+                     style="--value:{{ val['renewableenergy'] }}; --color: rgb(193, 99, 255); margin-right: 10px;"></div>
+            </div>
+            <div style="text-align: center;">
+                <label>{{ gettext('Green House Gas') }}</label>
+                <div role="progressbar"
+                     style="--value:{{ val['greenhousegas'] }}; --color: rgb(90, 235, 54); margin-right: 10px;"></div>
+            </div>
+
+        </div>
+    </div>
+    <div style="width: 400px; height: 400px;">
+        <br>
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const data = {
+        labels: [
+            "{{ gettext('Recyclables') }}",
+            "{{ gettext('Garbage') }}",
+            "{{ gettext('Compost Organics') }}",
+            "{{ gettext('Renewable Energy') }}",
+            "{{ gettext('Green House Gas') }}",
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [
+                "{{ val['recyclables'] }}", 
+                "{{ val['garbage'] }}", 
+                "{{ val['compostorganics'] }}",
+                "{{ val['renewableenergy'] }}",
+                "{{ val['greenhousegas'] }}"
+            ],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)',
+                'rgb(193, 99, 255)',
+                'rgb(90, 235, 54)',
+            ],
+            hoverOffset: 4
+        }]
+    };
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Doughnut Chart'
+                }
+            }
+        },
+    };
+    const myChart = new Chart(ctx, config);
+
+</script>
+{% endblock %}      
