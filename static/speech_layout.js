@@ -16,7 +16,8 @@ function speak(){
     var page = $('h2').text();
     voices = speechSynthesis.getVoices();
     if(page == "Home Page"){
-        speechSynthesis.speak(new SpeechSynthesisUtterance($('#greeting').text() ));
+        speechSynthesis.speak(new SpeechSynthesisUtterance($('#greeting').text(), ""));
+        homePageDataVoice();
     }
     else{
     speechSynthesis.speak(new SpeechSynthesisUtterance(page));
@@ -61,4 +62,20 @@ function speak(){
         
     }
    
+}
+
+
+function homePageDataVoice(){
+        var tds = document.querySelectorAll('td');
+
+        for (var i = 0; i < tds.length; i++) {
+            console.log(tds[i].innerText);
+            if(tds[i].innerText.toLowerCase().indexOf('email') === -1){
+                tds[i].onmouseenter = function(){
+                       voices = speechSynthesis.getVoices();
+                       speechSynthesis.speak(new SpeechSynthesisUtterance(this.innerText)); 
+                }
+
+            }
+        }
 }
