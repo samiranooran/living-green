@@ -28,11 +28,11 @@ $(document).ready(function() {
 
 function startSpeechSynthesis(){
 
-    sessionStorage.setItem("isSpeechOn", true);
+    //sessionStorage.setItem("isSpeechOn", true);
     
          
     var inputs = document.querySelectorAll('input');
-    console.log(inputs);
+    
     if(inputs[3].id == "email"){
         //current page is register
         if (language == "en") {
