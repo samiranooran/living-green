@@ -25,7 +25,7 @@ app.config['threaded'] = True
 # Enter your database connection details below
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_PASSWORD'] = 'root@localhost'
 app.config['MYSQL_DB'] = 'pythonlogin'
 
 # Enter your email server details below, the following details uses the gmail smtp server (requires gmail account)
@@ -146,8 +146,8 @@ def register():
 			return gettext('Account already exists!')
 		elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
 			return gettext('Invalid email address!')
-		elif not re.match(r'[A-Za-z0-9]+', username):
-			return gettext('Username must contain only characters and numbers!')
+		elif not re.match(r'^[A-Za-z0-9_-]*$', username):
+			return gettext('Username must contain letters, numbers, underscores and dashes only')
 		elif not username or not password or not cpassword or not email:
 			return gettext('Please fill out the form!')
 		elif password != cpassword:
