@@ -25,7 +25,7 @@ app.config['threaded'] = True
 # Enter your database connection details below
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'root@localhost'
+app.config['MYSQL_PASSWORD'] = '8288'
 app.config['MYSQL_DB'] = 'pythonlogin'
 
 # Enter your email server details below, the following details uses the gmail smtp server (requires gmail account)
