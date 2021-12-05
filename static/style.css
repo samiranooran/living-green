@@ -197,8 +197,8 @@
   
   .content > p, .content > div {
 	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-	margin: 25px 0;
-	padding: 25px;
+	margin: 12px 0;
+	padding: 10px;
 	background-color: #fff;
   }
   
